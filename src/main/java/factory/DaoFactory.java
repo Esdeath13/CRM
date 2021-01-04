@@ -1,11 +1,14 @@
 package factory;
 
 import dao.CustomerDao;
+import dao.EmployeeDao;
 import dao.InformationDao;
 import dao.UserDao;
 import dao.impl.CustomerDaoImpl;
+import dao.impl.EmployeeDaoImpl;
 import dao.impl.InformationDaoImpl;
 import dao.impl.UserDaoImpl;
+import entity.Employee;
 import entity.Information;
 import entity.User;
 
@@ -41,5 +44,8 @@ public class DaoFactory {
      */
     public static InformationDao getInformationDaoInstance(){
         return new InformationDaoImpl();
+    }
+    public static EmployeeDao getEmployeeDaoInstance() {
+        return new EmployeeDaoImpl();
     }
 }

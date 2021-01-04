@@ -2,6 +2,7 @@ package frame;
 
 import com.sun.org.apache.xml.internal.security.Init;
 import entity.Customer;
+import entity.Employee;
 import entity.Information;
 import factory.ServiceFactory;
 import sun.swing.table.DefaultTableCellHeaderRenderer;
@@ -24,7 +25,7 @@ import java.util.List;
  * @Author YWT
  * @Date 2020/12/29 10:27
  **/
-public class AdminFrame<用户信息Button, e> extends JFrame {
+public class AdminFrame extends JFrame {
     private JPanel mainPanel;
     private JButton 用户信息Button;
     private JButton 员工信息Button;
@@ -38,7 +39,10 @@ public class AdminFrame<用户信息Button, e> extends JFrame {
     private JPanel topPanel;
     private JPanel bottomPanel;
     private JLabel timeLabel;
+    private JPanel employeePanel;
+    private JPanel tablePanel2;
     private JTable table;
+    private JTable table2;
 
     /**
      * 自定义变量
@@ -54,7 +58,10 @@ public class AdminFrame<用户信息Button, e> extends JFrame {
         c = new CardLayout();
         centerPanel.setLayout(c);
         centerPanel.add("1", customerPanel);
+        centerPanel.add("2", employeePanel);
         showCustomerTable(ServiceFactory.getCustomerSeriviceInstance().selectAll());
+        showEmployeeTable(ServiceFactory.getEmployeeSeriviceInstance().selectAll());
+
         customerBox.addItem(customerVo.builder().name("请选择姓名").build());
         List<customerVo> customers = ServiceFactory.getCustomerSeriviceInstance().selectAll();
         for (customerVo customer : customers) {
@@ -75,8 +82,10 @@ public class AdminFrame<用户信息Button, e> extends JFrame {
         用户信息Button.addActionListener(e -> {
             c.show(centerPanel, "1");
             showCustomerTable(ServiceFactory.getCustomerSeriviceInstance().selectAll());
-
-
+        });
+        员工信息Button.addActionListener(e -> {
+            c.show(centerPanel, "2");
+            showEmployeeTable(ServiceFactory.getEmployeeSeriviceInstance().selectAll());
         });
 
         新增Button.addActionListener(e -> {
@@ -90,6 +99,7 @@ public class AdminFrame<用户信息Button, e> extends JFrame {
             showCustomerTable(ServiceFactory.getCustomerSeriviceInstance().selectAll());
             table.validate();
         });
+
     }
 
     public void init() {
@@ -139,6 +149,48 @@ public class AdminFrame<用户信息Button, e> extends JFrame {
         tablePanel.add(scrollPane);
         tablePanel.revalidate();
     }
+
+
+    public void showEmployeeTable(List<Employee> employeeList) {
+        tablePanel2.removeAll();
+        //创建表格
+        table2 = new JTable();
+        //表格数据模型
+        DefaultTableModel model = new DefaultTableModel();
+        table2.setModel(model);
+        //表头内容
+        model.setColumnIdentifiers(new String[]{"编号", "姓名", "部门", "产品类型", "任务编号", "工资"});
+        //遍历List,转成Object数组
+        for (Employee employee : employeeList) {
+            Object[] object = new Object[]{employee.getId(), employee.getName(), employee.getDepartment(),employee.getType(), employee.getT_id(), employee.getSalary()};
+            model.addRow(object);
+        }
+
+        //获得表头
+        JTableHeader head = table2.getTableHeader();
+        //表头居中
+        DefaultTableCellHeaderRenderer hr = new DefaultTableCellHeaderRenderer();
+        hr.setHorizontalAlignment(JLabel.CENTER);
+        head.setDefaultRenderer(hr);
+        //设置表头大小
+        head.setPreferredSize(new Dimension(head.getWidth(), 40));
+        //设置表头字体
+        head.setFont(new Font("楷体", Font.PLAIN, 16));
+        //设置表格行高
+        table2.setRowHeight(35);
+        //表格背景色
+        table2.setBackground(new Color(223, 241, 234));
+        //表格内容居中
+        DefaultTableCellRenderer r = new DefaultTableCellRenderer();
+        r.setHorizontalAlignment(JLabel.CENTER);
+        table2.setDefaultRenderer(Object.class, r);
+        //表格加入滚动面板,水平垂直方向带滚动条
+        JScrollPane scrollPane = new JScrollPane(table2, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        tablePanel2.add(scrollPane);
+        tablePanel2.revalidate();
+    }
+
     public static void main(String[] args) {
         new AdminFrame();
     }

@@ -121,6 +121,23 @@
               </grid>
             </children>
           </grid>
+          <grid id="425db" binding="employeePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints>
+              <card name="Card2"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="20c74" binding="tablePanel2" layout-manager="BorderLayout" hgap="0" vgap="0">
+                <constraints border-constraint="Center"/>
+                <properties>
+                  <background color="-460294"/>
+                </properties>
+                <border type="none"/>
+                <children/>
+              </grid>
+            </children>
+          </grid>
         </children>
       </grid>
     </children>

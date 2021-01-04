@@ -1,10 +1,13 @@
 package factory;
 
+import entity.Employee;
 import entity.Information;
 import service.CustomerService;
+import service.EmployeeService;
 import service.InformationService;
 import service.UserService;
 import service.impl.CustomerServiceImpl;
+import service.impl.EmployeeServiceImpl;
 import service.impl.InformationServiceImpl;
 import service.impl.UserServiceImpl;
 
@@ -26,5 +29,8 @@ public class ServiceFactory {
 
     public static InformationService getInformationServiceInstance(){
         return new InformationServiceImpl();
+    }
+    public static EmployeeService getEmployeeSeriviceInstance(){
+        return new EmployeeServiceImpl();
     }
 }

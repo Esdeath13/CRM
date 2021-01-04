@@ -16,9 +16,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Employee {
-    private Integer id;
+    private String id;
     private String name;
     private String department;
     private String type;
+    private String t_id;
     private Float salary;
 }
