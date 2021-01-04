@@ -1,32 +1,35 @@
-package entity;
+package vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
- * @ClassName Information
+ * @ClassName customerVo
  * @Description TODO
  * @Author YWT
- * @Date 2020/12/29 12:39
+ * @Date 2020/12/30 9:22
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Information {
+public class customerVo {
     private Integer id;
-    private String c_id;
+    private String name;
+    private String  phone;
+    private String adress;
+    private String credit;
+    private Integer p_id;
     private Date time;
-    private String content;
-    private String p_id;
-    private Integer result;
+    private Integer e_id;
+
 
     @Override
     public String toString() {
-        return this.p_id;
+        return this.name;
     }
 }

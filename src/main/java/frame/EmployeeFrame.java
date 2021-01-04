@@ -10,6 +10,7 @@ import javax.swing.*;
  **/
 public class EmployeeFrame extends JFrame {
     private JPanel mainPanel;
+
     public EmployeeFrame(){
         init();
     }

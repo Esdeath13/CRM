@@ -10,6 +10,7 @@ import javax.swing.*;
  **/
 public class CustomerFrame extends JFrame{
     private JPanel mainPanel;
+
     public CustomerFrame(){
         init();
     }

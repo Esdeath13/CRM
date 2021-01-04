@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * @ClassName Customer
  * @Description TODO
@@ -16,9 +18,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Customer {
-    private Integer id;
+    private String id;
     private String name;
-    private Integer phone;
+    private String phone;
     private String adress;
     private String credit;
+    private String p_id;
+    private Date c_time;
+    private String e_id;
 }
