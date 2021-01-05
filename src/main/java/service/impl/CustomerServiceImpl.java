@@ -41,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public int deleteById(int id) {
+    public int deleteById(String id) {
         int n = 0;
         try {
             n = customerDao.deleteById(id);

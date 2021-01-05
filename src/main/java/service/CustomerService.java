@@ -31,5 +31,5 @@ public interface CustomerService {
      * @param id id
      * @return int
      */
-    int deleteById(int id);
+    int deleteById(String id);
 }

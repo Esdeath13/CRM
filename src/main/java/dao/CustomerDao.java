@@ -23,7 +23,7 @@ public interface CustomerDao {
     List<customerVo> selectAll() throws SQLException;
 
     /**
-     * 新增
+     * 插入客户
      *
      * @param customer 入参
      * @return int
@@ -37,6 +37,6 @@ public interface CustomerDao {
      * @return int
      * @throws SQLException 异常
      */
-    int deleteById(int id) throws SQLException;
+    int deleteById(String id) throws SQLException;
 
 }

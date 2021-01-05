@@ -37,7 +37,7 @@ public class CustomerDaoTest {
     }
     @Test
     public void deleteById() throws SQLException {
-        int n = customerDao.deleteById(22);
+        int n = customerDao.deleteById("22");
         assertEquals(1, n);
     }
 }

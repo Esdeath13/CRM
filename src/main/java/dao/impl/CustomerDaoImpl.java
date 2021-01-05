@@ -59,12 +59,12 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     @Override
-    public int deleteById(int id) throws SQLException {
+    public int deleteById(String id) throws SQLException {
         JdbcUtil jdbcUtil = JdbcUtil.getInitJdbcUtil();
         Connection conn = jdbcUtil.getConnection();
         String sql = "DELETE FROM customer WHERE c_id = ?";
         PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setInt(1, id);
+        pstmt.setString(1, id);
         int n = pstmt.executeUpdate();
         pstmt.close();
         conn.close();

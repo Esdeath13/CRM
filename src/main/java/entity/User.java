@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class User {
-    private  Integer id;
+    private Integer id;
     private String account;
     private String password;
     private Integer type;

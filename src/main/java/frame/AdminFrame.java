@@ -68,9 +68,7 @@ public class AdminFrame extends JFrame {
             customerBox.addItem(customer);
         }
 
-        Customer tip1 = new Customer();
-        tip1.setName("请选择姓名");
-        customerBox.addItem(tip1);
+
         Information tip2 = new Information();
         tip2.setP_id("请选择产品编号");
         informationBox.addItem(tip2);
@@ -94,7 +92,7 @@ public class AdminFrame extends JFrame {
         });
         删除Button.addActionListener(e -> {
             int a = table.getSelectedRow();
-            ServiceFactory.getCustomerSeriviceInstance().deleteById(a - 1);
+            ServiceFactory.getCustomerSeriviceInstance().deleteById(table.getValueAt(a,0).toString());
             JOptionPane.showMessageDialog(null, "删除成功");
             showCustomerTable(ServiceFactory.getCustomerSeriviceInstance().selectAll());
             table.validate();
