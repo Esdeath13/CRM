@@ -55,6 +55,7 @@ public class AdminFrame extends JFrame {
         timeThread.start();
         init();
 
+
         c = new CardLayout();
         centerPanel.setLayout(c);
         centerPanel.add("1", customerPanel);
@@ -116,10 +117,10 @@ public class AdminFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel();
         table.setModel(model);
         //表头内容
-        model.setColumnIdentifiers(new String[]{"编号", "姓名", "电话", "地址", "信用度", "商品编号", "消费时间", "联系人编号"});
+        model.setColumnIdentifiers(new String[]{"编号", "姓名", "电话", "地址", "信用度", "商品编号","商品名称", "消费时间", "联系人编号"});
         //遍历List,转成Object数组
         for (customerVo customer : customerList) {
-            Object[] object = new Object[]{customer.getId(), customer.getName(), customer.getPhone(), customer.getAdress(), customer.getCredit(), customer.getP_id(), customer.getTime(), customer.getE_id()};
+            Object[] object = new Object[]{customer.getId(), customer.getName(), customer.getPhone(), customer.getAdress(), customer.getCredit(), customer.getP_id(), customer.getP_name(),customer.getTime(), customer.getE_id()};
             model.addRow(object);
         }
 

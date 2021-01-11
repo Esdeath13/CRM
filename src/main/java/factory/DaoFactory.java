@@ -45,6 +45,7 @@ public class DaoFactory {
     public static InformationDao getInformationDaoInstance(){
         return new InformationDaoImpl();
     }
+
     public static EmployeeDao getEmployeeDaoInstance() {
         return new EmployeeDaoImpl();
     }

@@ -1,7 +1,9 @@
 package dao;
 
 import entity.Customer;
+import vo.ShowCustomerVo;
 import vo.customerVo;
+import vo.employeeVo;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -38,5 +40,13 @@ public interface CustomerDao {
      * @throws SQLException 异常
      */
     int deleteById(String id) throws SQLException;
+    /**
+     * 查询员工所有信息
+     *
+     * @return
+     * @throws SQLException
+     */
+
+    List<ShowCustomerVo> showAll() throws SQLException;
 
 }

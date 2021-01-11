@@ -30,6 +30,7 @@ public class ServiceFactory {
     public static InformationService getInformationServiceInstance(){
         return new InformationServiceImpl();
     }
+
     public static EmployeeService getEmployeeSeriviceInstance(){
         return new EmployeeServiceImpl();
     }

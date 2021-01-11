@@ -2,6 +2,7 @@ package service;
 
 import entity.Employee;
 import entity.Information;
+import vo.employeeVo;
 
 import java.util.List;
 
@@ -18,4 +19,11 @@ public interface EmployeeService {
      * @return List<Information>
      */
     List<Employee> selectAll();
+
+    /**
+     * 查询所有
+     *
+     * @return List<Information>
+     */
+    List<employeeVo> showAll();
 }

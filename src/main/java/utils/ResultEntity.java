@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ResultEntity {
-    private int code;
+    private Integer code;
     private String message;
     private Object data;
-    private int type;
+    private Integer type;
 }

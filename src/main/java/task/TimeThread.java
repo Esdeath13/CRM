@@ -26,7 +26,7 @@ public class TimeThread extends Thread {
         while (true) {
             Date date = new Date();
             DateFormat df3 = new SimpleDateFormat("yyy年MM月dd日 hh时mm分ss秒 EE", Locale.CHINA);
-            timeLabel.setText(String.valueOf(df3.format(date)));
+            timeLabel.setText(df3.format(date));
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {

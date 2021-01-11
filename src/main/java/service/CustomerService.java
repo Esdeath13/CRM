@@ -1,7 +1,9 @@
 package service;
 
 import entity.Customer;
+import vo.ShowCustomerVo;
 import vo.customerVo;
+import vo.employeeVo;
 
 import java.util.List;
 
@@ -32,4 +34,10 @@ public interface CustomerService {
      * @return int
      */
     int deleteById(String id);
+    /**
+     * 查询所有
+     *
+     * @return List<Information>
+     */
+    List<ShowCustomerVo> showAll();
 }

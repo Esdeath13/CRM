@@ -3,7 +3,9 @@ package dao.impl;
 import dao.CustomerDao;
 import entity.Customer;
 import utils.JdbcUtil;
+import vo.ShowCustomerVo;
 import vo.customerVo;
+import vo.employeeVo;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -71,6 +73,21 @@ public class CustomerDaoImpl implements CustomerDao {
         return n;
     }
 
+    @Override
+    public List<ShowCustomerVo> showAll() throws SQLException {
+        JdbcUtil jdbcUtil = JdbcUtil.getInitJdbcUtil();
+        Connection connection = jdbcUtil.getConnection();
+        String sql = "SELECT c_id, c_name, c_phone, c_adress,c_credit, p_id, c_time, p_name, p_price\n " +
+                "FROM customer NATURAL JOIN product ";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        ResultSet rs = pstmt.executeQuery();
+        List<ShowCustomerVo> ShowCustomerVoList = convert2(rs);
+        rs.close();
+        pstmt.close();
+        jdbcUtil.closeConnection();
+        return ShowCustomerVoList;
+    }
+
     private List<customerVo> convert(ResultSet rs) throws SQLException {
         List<customerVo> list = new ArrayList<>();
         while (rs.next()) {
@@ -81,11 +98,30 @@ public class CustomerDaoImpl implements CustomerDao {
                     .adress(rs.getString("c_adress"))
                     .credit(rs.getString("c_credit"))
                     .p_id(rs.getInt("p_id"))
+                    .p_name(rs.getString("p_name"))
                     .time(rs.getDate("c_time"))
                     .e_id(rs.getInt("e_id"))
                     .build();
             list.add(customer);
         }
         return list;
+    }
+    private List<ShowCustomerVo> convert2(ResultSet rs) throws SQLException {
+        List<ShowCustomerVo> ShowCustomerVoList = new ArrayList<>();
+        while (rs.next()) {
+            ShowCustomerVo showCustomer = new ShowCustomerVo();
+            showCustomer.setId(rs.getString("c_id"));
+            showCustomer.setName(rs.getString("c_name"));
+            showCustomer.setPhone(rs.getString("c_phone"));
+            showCustomer.setAdress(rs.getString("c_adress"));
+            showCustomer.setCredit(rs.getString("c_credit"));
+            showCustomer.setP_id(rs.getString("p_id"));
+            showCustomer.setC_time(rs.getDate("c_time"));
+            showCustomer.setP_name(rs.getString("p_name"));
+            showCustomer.setP_price(rs.getString("p_price"));
+
+            ShowCustomerVoList.add(showCustomer);
+        }
+        return ShowCustomerVoList;
     }
 }

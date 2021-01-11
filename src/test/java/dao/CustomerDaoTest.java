@@ -5,7 +5,9 @@ import factory.DaoFactory;
 import factory.ServiceFactory;
 import org.junit.Test;
 import service.CustomerService;
+import vo.ShowCustomerVo;
 import vo.customerVo;
+import vo.employeeVo;
 
 import java.sql.SQLException;
 import java.util.Date;
@@ -39,6 +41,11 @@ public class CustomerDaoTest {
     public void deleteById() throws SQLException {
         int n = customerDao.deleteById("22");
         assertEquals(1, n);
+    }
+    @Test
+    public void showAll() throws SQLException {
+        List<ShowCustomerVo> list = DaoFactory.getCustomerDaoInstance().showAll();
+        list.forEach(System.out::println);
     }
 }
 

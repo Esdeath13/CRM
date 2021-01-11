@@ -4,7 +4,9 @@ import dao.CustomerDao;
 import entity.Customer;
 import factory.DaoFactory;
 import service.CustomerService;
+import vo.ShowCustomerVo;
 import vo.customerVo;
+import vo.employeeVo;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -49,5 +51,16 @@ public class CustomerServiceImpl implements CustomerService {
             System.err.println("删除学生出现异常");
         }
         return n;
+    }
+
+    @Override
+    public List<ShowCustomerVo> showAll() {
+        List<ShowCustomerVo> list = null;
+        try {
+            list = DaoFactory.getCustomerDaoInstance().showAll();
+        } catch (SQLException e) {
+            System.err.println("查询用户出现异常");
+        }
+        return list;
     }
 }

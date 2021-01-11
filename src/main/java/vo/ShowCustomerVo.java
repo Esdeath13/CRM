@@ -5,32 +5,27 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
- * @ClassName customerVo
+ * @ClassName showCustomerVo
  * @Description TODO
  * @Author YWT
- * @Date 2020/12/30 9:22
+ * @Date 2021/1/7 13:50
  **/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class customerVo {
-    private Integer id;
+public class ShowCustomerVo {
+    private String id;
     private String name;
-    private String  phone;
+    private String phone;
     private String adress;
     private String credit;
-    private Integer p_id;
+    private String p_id;
+    private Date c_time;
     private String p_name;
-    private Date time;
-    private Integer e_id;
+    private String p_price;
 
-
-    @Override
-    public String toString() {
-        return this.name;
-    }
 }
