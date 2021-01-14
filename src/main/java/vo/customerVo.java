@@ -20,7 +20,7 @@ import java.sql.Date;
 public class customerVo {
     private Integer id;
     private String name;
-    private String  phone;
+    private String phone;
     private String adress;
     private String credit;
     private Integer p_id;

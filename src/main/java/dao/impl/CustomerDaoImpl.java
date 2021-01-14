@@ -88,6 +88,39 @@ public class CustomerDaoImpl implements CustomerDao {
         return ShowCustomerVoList;
     }
 
+    @Override
+    public List<Customer> selectByAccount(String account) throws SQLException {
+        JdbcUtil jdbcUtil = JdbcUtil.getInitJdbcUtil();
+        Connection connection = jdbcUtil.getConnection();
+        String sql = "SELECT * FROM customer WHERE c_name = ? ";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setString(1, account);
+        ResultSet rs = pstmt.executeQuery();
+        List<Customer> list = convert1(rs);
+        rs.close();
+        pstmt.close();
+        jdbcUtil.closeConnection();
+        return list;
+    }
+
+    private List<Customer> convert1(ResultSet rs) throws SQLException {
+        List<Customer> list = new ArrayList<>();
+        while (rs.next()) {
+            Customer customer = Customer.builder()
+                    .id(rs.getString("c_id"))
+                    .name(rs.getString("c_name"))
+                    .phone((rs.getString("c_phone")))
+                    .adress(rs.getString("c_adress"))
+                    .credit(rs.getString("c_credit"))
+                    .p_id(rs.getString("p_id"))
+                    .c_time(rs.getDate("c_time"))
+                    .e_id(rs.getString("e_id"))
+                    .build();
+            list.add(customer);
+        }
+        return list;
+    }
+
     private List<customerVo> convert(ResultSet rs) throws SQLException {
         List<customerVo> list = new ArrayList<>();
         while (rs.next()) {

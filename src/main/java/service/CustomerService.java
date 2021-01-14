@@ -28,7 +28,7 @@ public interface CustomerService {
      */
     int insertCustomer(Customer customer);
     /**
-     * 删除学生
+     * 删除
      *
      * @param id id
      * @return int
@@ -40,4 +40,12 @@ public interface CustomerService {
      * @return List<Information>
      */
     List<ShowCustomerVo> showAll();
+
+    /**
+     *
+     * 根据account查询信息
+     *
+     * @return List<Customer>
+     */
+    List<Customer> selectByAccount(String account);
 }

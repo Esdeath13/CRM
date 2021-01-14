@@ -48,5 +48,12 @@ public interface CustomerDao {
      */
 
     List<ShowCustomerVo> showAll() throws SQLException;
-
+    /**
+     * 按照id查询
+     *
+     * @param account id
+     * @return List<Customer>
+     * @throws SQLException 异常
+     */
+    List<Customer> selectByAccount(String account) throws SQLException;
 }

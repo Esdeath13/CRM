@@ -41,6 +41,10 @@ public class AdminFrame extends JFrame {
     private JLabel timeLabel;
     private JPanel employeePanel;
     private JPanel tablePanel2;
+    private JButton 删除Button1;
+    private JButton 新增Button1;
+    private JPanel buttonPanel;
+    private JButton 退出Button;
     private JTable table;
     private JTable table2;
 
@@ -99,6 +103,21 @@ public class AdminFrame extends JFrame {
             table.validate();
         });
 
+        新增Button1.addActionListener(e -> {
+            new AddEmployeeFrame(AdminFrame.this);
+            AdminFrame.this.setEnabled(true);
+        });
+        删除Button1.addActionListener(e -> {
+            int a = table2.getSelectedRow();
+            ServiceFactory.getEmployeeSeriviceInstance().deleteById(table2.getValueAt(a,0).toString());
+            JOptionPane.showMessageDialog(null, "删除成功");
+            showEmployeeTable(ServiceFactory.getEmployeeSeriviceInstance().selectAll());
+            table2.validate();
+        });
+        退出Button.addActionListener(e -> {
+            new LoginFrame();
+            this.dispose();
+        });
     }
 
     public void init() {
@@ -117,10 +136,10 @@ public class AdminFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel();
         table.setModel(model);
         //表头内容
-        model.setColumnIdentifiers(new String[]{"编号", "姓名", "电话", "地址", "信用度", "商品编号","商品名称", "消费时间", "联系人编号"});
+        model.setColumnIdentifiers(new String[]{"编号", "姓名", "电话", "地址", "信用度", "商品编号", "消费时间", "联系人编号"});
         //遍历List,转成Object数组
         for (customerVo customer : customerList) {
-            Object[] object = new Object[]{customer.getId(), customer.getName(), customer.getPhone(), customer.getAdress(), customer.getCredit(), customer.getP_id(), customer.getP_name(),customer.getTime(), customer.getE_id()};
+            Object[] object = new Object[]{customer.getId(), customer.getName(), customer.getPhone(), customer.getAdress(), customer.getCredit(), customer.getP_id(), customer.getTime(), customer.getE_id()};
             model.addRow(object);
         }
 

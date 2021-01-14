@@ -28,13 +28,13 @@ public class EmployeeFrame extends JFrame {
 
     private JTable table;
 
-    public EmployeeFrame(){
+    public EmployeeFrame(String account){
         TimeThread timeThread = new TimeThread();
         timeThread.setTimeLabel(timeLabel);
         timeThread.start();
         init();
 
-        showEmployeeTable(ServiceFactory.getEmployeeSeriviceInstance().showAll());
+        showEmployeeTable(ServiceFactory.getEmployeeSeriviceInstance().selectByAccount(account));
     }
     public void init(){
         this.setTitle("MainFrame");
@@ -43,7 +43,7 @@ public class EmployeeFrame extends JFrame {
         this.setSize(1000,800);
         this.setVisible(true);
     }
-    public void showEmployeeTable(List<employeeVo> employeeVoList) {
+    public void showEmployeeTable(List<Employee> employeeVoList) {
         showPanel.removeAll();
         //创建表格
         table = new JTable();
@@ -51,10 +51,10 @@ public class EmployeeFrame extends JFrame {
         DefaultTableModel model = new DefaultTableModel();
         table.setModel(model);
         //表头内容
-        model.setColumnIdentifiers(new String[]{"编号", "姓名", "部门", "产品类型", "任务编号", "工资", "客户数量", "利润"});
+        model.setColumnIdentifiers(new String[]{"编号", "姓名", "部门", "产品类型", "任务编号", "工资"});
         //遍历List,转成Object数组
-        for (employeeVo employee : employeeVoList) {
-            Object[] object = new Object[]{employee.getE_id(), employee.getE_name(), employee.getE_department(), employee.getE_type(), employee.getT_id(), employee.getE_salary(), employee.getT_quantity(), employee.getT_profit()};
+        for (Employee employee : employeeVoList) {
+            Object[] object = new Object[]{employee.getId(), employee.getName(), employee.getDepartment(), employee.getType(), employee.getT_id(), employee.getSalary()};
             model.addRow(object);
         }
 
@@ -84,6 +84,6 @@ public class EmployeeFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        new EmployeeFrame();
+        new EmployeeFrame("涛涛");
     }
 }

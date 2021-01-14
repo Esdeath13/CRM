@@ -30,13 +30,13 @@ public class LoginFrame extends JFrame{
     JButton button_ok = new JButton("登陆");
     JButton button_cancel = new JButton("取消");
     JComboBox textType   = null;
-    // 登陆用户名
+
     JTextField text_name = new JTextField();
-    // 登陆密码
+
     JPasswordField text_password = new JPasswordField();
 
     private static final long serialVersionUID = 1L;
-    // 用于处理拖动事件，表示鼠标按下时的坐标，相对于JFrame
+
     int xOld = 0;
     int yOld = 0;
 
@@ -54,9 +54,10 @@ public class LoginFrame extends JFrame{
                 if (resultEntity.getType() == 0){
                     new AdminFrame();
                 }else if (resultEntity.getType() == 1){
-                    new EmployeeFrame();
+                    new EmployeeFrame(text_name.getText());
                 }else if (resultEntity.getType() == 2){
-                    new CustomerFrame();
+                    new CustomerFrame(text_name.getText());
+
                 }else {
                     text_name.setText("");
                     text_password.setText("");
@@ -200,6 +201,7 @@ public class LoginFrame extends JFrame{
     public static void main(String[] args) {
         // TODO Auto-generated method stub
         new LoginFrame();
+
 
     }
 

@@ -1,5 +1,6 @@
 package frame;
 
+import entity.Customer;
 import factory.ServiceFactory;
 import sun.swing.table.DefaultTableCellHeaderRenderer;
 import task.TimeThread;
@@ -26,13 +27,13 @@ public class CustomerFrame extends JFrame{
 
     private JTable table;
 
-    public CustomerFrame(){
+    public CustomerFrame(String account){
         TimeThread timeThread = new TimeThread();
         timeThread.setTimeLabel(timeLabel);
         timeThread.start();
         init();
 
-        showCustomerTable(ServiceFactory.getCustomerSeriviceInstance().showAll());
+        showCustomerTable(ServiceFactory.getCustomerSeriviceInstance().selectByAccount(account));
     }
     public void init(){
         this.setTitle("MainFrame");
@@ -41,7 +42,7 @@ public class CustomerFrame extends JFrame{
         this.setSize(1000,800);
         this.setVisible(true);
     }
-    public void showCustomerTable(List<ShowCustomerVo> ShowCustomerVoList) {
+    public void showCustomerTable(List<Customer> ShowCustomerVoList) {
         showPanel.removeAll();
         //创建表格
         table = new JTable();
@@ -49,10 +50,10 @@ public class CustomerFrame extends JFrame{
         DefaultTableModel model = new DefaultTableModel();
         table.setModel(model);
         //表头内容
-        model.setColumnIdentifiers(new String[]{"编号", "姓名", "电话", "地址", "信用", "商品编号", "消费时间", "商品名称", "商品价格"});
+        model.setColumnIdentifiers(new String[]{"编号", "姓名", "电话", "地址", "信用", "商品编号", "消费时间", "商品编号"});
         //遍历List,转成Object数组
-        for (ShowCustomerVo ShowCustomer : ShowCustomerVoList) {
-            Object[] object = new Object[]{ShowCustomer.getId(), ShowCustomer.getName(), ShowCustomer.getPhone(), ShowCustomer.getAdress(), ShowCustomer.getCredit(), ShowCustomer.getP_id(), ShowCustomer.getC_time(), ShowCustomer.getP_name(), ShowCustomer.getP_price()};
+        for (Customer ShowCustomer : ShowCustomerVoList) {
+            Object[] object = new Object[]{ShowCustomer.getId(), ShowCustomer.getName(), ShowCustomer.getPhone(), ShowCustomer.getAdress(), ShowCustomer.getCredit(), ShowCustomer.getP_id(), ShowCustomer.getC_time(), ShowCustomer.getE_id()};
             model.addRow(object);
         }
 
@@ -82,7 +83,8 @@ public class CustomerFrame extends JFrame{
     }
 
     public static void main(String[] args) {
-        new CustomerFrame();
+
+        new CustomerFrame("杨文涛");
     }
 }
 

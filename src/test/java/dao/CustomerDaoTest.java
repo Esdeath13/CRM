@@ -26,7 +26,7 @@ public class CustomerDaoTest {
     @Test
     public void insert() throws SQLException {
         Customer customer = new Customer();
-        customer.setId("3");
+        customer.setId("5");
         customer.setName("涛涛");
         customer.setPhone("17368686016");
         customer.setAdress("镇江");
@@ -46,6 +46,11 @@ public class CustomerDaoTest {
     public void showAll() throws SQLException {
         List<ShowCustomerVo> list = DaoFactory.getCustomerDaoInstance().showAll();
         list.forEach(System.out::println);
+    }
+    @Test
+    public void selectByAccount() throws Exception {
+        List<Customer> list = customerDao.selectByAccount("杨文涛");
+        System.out.println(list);
     }
 }
 

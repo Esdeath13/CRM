@@ -32,7 +32,7 @@ public class UserDaoImpl implements UserDao {
             int type = rs.getInt("type");
             user = new User();
             user.setId(id);
-            user.setAccount(account);
+            user.setAccount(adminAccount);
             user.setPassword(password);
             user.setType(type);
         }

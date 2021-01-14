@@ -30,14 +30,15 @@ public class UserServiceImpl implements UserService {
         }
         //根据账号查找到了记录
         if (user != null) {
-            //System.out.println(DigestUtils.md5Hex(password));
+
 
             if (password.equals(user.getPassword())) {
                 resultEntity = ResultEntity.builder().code(0).message("登录成功").data(user).type(user.getType()).build();
             } else {
                 resultEntity = ResultEntity.builder().code(1).message("密码错误").build();
             }
-        } else {  //账号不存在
+        } else {
+            //账号不存在
             resultEntity = ResultEntity.builder().code(2).message("账号不存在").build();
         }
         return resultEntity;

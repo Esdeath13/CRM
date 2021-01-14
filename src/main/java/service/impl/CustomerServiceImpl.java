@@ -63,4 +63,19 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return list;
     }
+
+    @Override
+    public List<Customer> selectByAccount(String account) {
+        List<Customer> list = null;
+        try {
+            list = DaoFactory.getCustomerDaoInstance().selectByAccount(account);
+        }catch (SQLException e){
+            System.err.println("根据account查询信息出错");
+        }
+        return list;
+    }
+
+
 }
+
+

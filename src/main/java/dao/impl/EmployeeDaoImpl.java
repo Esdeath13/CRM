@@ -1,6 +1,7 @@
 package dao.impl;
 
 import dao.EmployeeDao;
+import entity.Customer;
 import entity.Employee;
 import utils.JdbcUtil;
 import vo.employeeVo;
@@ -46,6 +47,53 @@ public class EmployeeDaoImpl implements EmployeeDao {
         pstmt.close();
         jdbcUtil.closeConnection();
         return employeeVoList;
+    }
+
+    @Override
+    public int insertEmployee(Employee employee) throws SQLException {
+        JdbcUtil jdbcUtil = JdbcUtil.getInitJdbcUtil();
+        Connection conn = jdbcUtil.getConnection();
+        String sql = "INSERT INTO employee VALUES (?,?,?,?,?,?)";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, employee.getId());
+        pstmt.setString(2, employee.getName());
+        pstmt.setString(3, employee.getDepartment());
+        pstmt.setString(4, employee.getType());
+        pstmt.setString(5, employee.getT_id());
+        pstmt.setFloat(6, employee.getSalary());
+
+        int n = pstmt.executeUpdate();
+        pstmt.close();
+        conn.close();
+        return n;
+    }
+
+    @Override
+    public int deleteById(String id) throws SQLException {
+        JdbcUtil jdbcUtil = JdbcUtil.getInitJdbcUtil();
+        Connection conn = jdbcUtil.getConnection();
+        String sql = "DELETE FROM employee WHERE e_id = ?";
+        PreparedStatement pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, id);
+        int n = pstmt.executeUpdate();
+        pstmt.close();
+        conn.close();
+        return n;
+    }
+
+    @Override
+    public List<Employee> selectByAccount(String account) throws SQLException {
+        JdbcUtil jdbcUtil = JdbcUtil.getInitJdbcUtil();
+        Connection connection = jdbcUtil.getConnection();
+        String sql = "SELECT * FROM employee WHERE e_name = ? ";
+        PreparedStatement pstmt = connection.prepareStatement(sql);
+        pstmt.setString(1, account);
+        ResultSet rs = pstmt.executeQuery();
+        List<Employee> list = convert(rs);
+        rs.close();
+        pstmt.close();
+        jdbcUtil.closeConnection();
+        return list;
     }
 
     private List<Employee> convert(ResultSet rs) throws SQLException {
